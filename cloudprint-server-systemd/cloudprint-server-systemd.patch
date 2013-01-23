@@ -1,0 +1,119 @@
+--- generate_cloudprint_config.py.patch	2012-10-15 23:07:15.000000000 +0200
++++ /dev/null	2013-01-23 12:59:15.001536564 +0100
+@@ -1,4 +0,0 @@
+-1c1
+-< #!/usr/bin/python2.4
+----
+-> #!/usr/bin/python2
+
+
+--- generate_cloudprint_config.sh	2012-10-16 00:16:44.000000000 +0200
++++ generate_cloudprint_config.sh	2013-01-23 12:21:47.478885820 +0100
+@@ -1,7 +1,7 @@
+-#! /bin/sh
++#!/bin/sh
+ 
+ cd '/etc/cloudprint-server/connectors/'
+ python2 '/usr/lib/cloudprint-server/generate_cloudprint_config.py'
+ 
+-newf="$(ls -1 -rt | tail -1)"
++newf="$(ls -1t | head -1)"
+ cp -v "$newf" '/etc/cloudprint-server/Service State'
+
+
+--- PKGBUILD	2012-10-16 00:17:22.000000000 +0200
++++ PKGBUILD	2013-01-23 14:06:54.269041809 +0100
+@@ -1,33 +1,34 @@
+ # Maintainer: Kevin Cox <kevincox.ca@gmail.com>
+-pkgname='cloudprint-server-systemd'
+-pkgver='0'
++pkgname=cloudprint-server-systemd
++pkgver=1
+ pkgrel=1
+-pkgdesc='A systemd service file for starting Chromium in Google Cloud Print proxy mode.'
++pkgdesc='A systemd service file for starting Chromium in Google Cloud Print proxy mode'
+ arch=('any')
+ url='https://support.google.com/chromeos/a/bin/answer.py?hl=en&answer=2616503'
+-license=('MIT style')
+-depends=('chromium')
+-makedepends=()
++license=('MIT')
++depends=('chromium' 'python2')
++install=${pkgname}.install
+ 
+ source=('cloudprint-server.service'
+-        'http://www.google.com/support/enterprise/static/chromeos/docs/admin/en/generate_cloudprint_config.py.zip'
+-        'generate_cloudprint_config.py.patch'
+-        'generate_cloudprint_config.sh')
++	'http://www.google.com/support/enterprise/static/chromeos/docs/admin/en/generate_cloudprint_config.py.zip'
++	'generate_cloudprint_config.sh'
++	'LICENSE')
+ sha1sums=('3008e6e48bcd5a488aeec8ec4059dfe01950c8f6'
+-          '462fe8a6a15e9fd7db3f480129daa56f67975574'
+-          'da095c991e55fc1e3a19952fcd0dface7330c93b'
+-          '07fe33bb4b8e7376b38b565a8e8d8a42c54ac0a1')
++	'462fe8a6a15e9fd7db3f480129daa56f67975574'
++	'fa7cd27779c33f51596ddcd198b53a36abc2cae3'
++	'41613d070749f35f3890dbad6398a292a9f316b4')
+ 
+-build() {
+-	unzip -o generate_cloudprint_config.py.zip
+-	patch generate_cloudprint_config.py generate_cloudprint_config.py.patch
++package() {
++	sed -i 's|#!/usr/bin/python2.4|#!/usr/bin/python2|' generate_cloudprint_config.py
+ 
+-	mkdir -p "$pkgdir/usr/lib/systemd/system/"
+-	mkdir -p "$pkgdir/usr/lib/cloudprint-server/"
+-	mkdir -p "$pkgdir/etc/cloudprint-server/connectors/"
+-	chmod 600 "$pkgdir/etc/cloudprint-server/"
++	install -d "${pkgdir}"/usr/lib/systemd/system/
++	install -d "${pkgdir}"/usr/lib/cloudprint-server/
++	install -d "${pkgdir}"/etc/cloudprint-server/
++	install -d "${pkgdir}"/usr/share/licenses/cloudprint-server-systemd/
+ 
+-	install -v -m 755 -t "$pkgdir/usr/lib/cloudprint-server/" *.py *.sh
+-	install -v -m 644 -t "$pkgdir/usr/lib/systemd/system/" *.service
++	install -dm600 "${pkgdir}"/etc/cloudprint-server/connectors/
++	install -m644 cloudprint-server.service "${pkgdir}"/usr/lib/systemd/system/
++	install -m755 generate_cloudprint_config.py "${pkgdir}"/usr/lib/cloudprint-server/
++	install -m755 generate_cloudprint_config.sh "${pkgdir}"/usr/lib/cloudprint-server/
++	install -m644 LICENSE "${pkgdir}"/usr/share/licenses/cloudprint-server-systemd/
+ }
+-
+
+
+--- /dev/null	2013-01-23 12:59:15.001536564 +0100
++++ cloudprint-server-systemd.install	2013-01-23 13:53:11.110800741 +0100
+@@ -0,0 +1,5 @@
++post_install() {
++	printf "\n"
++	printf "==> Please run /usr/lib/cloudprint-server/generate_cloudprint_config.sh\n"
++	printf "    as root to generate the config file\n"
++}
+
+
+--- /dev/null	2013-01-23 12:59:15.001536564 +0100
++++ LICENSE	2013-01-23 12:37:18.379756656 +0100
+@@ -0,0 +1,22 @@
++Copyright (c) 2012 Google Inc.
++
++Permission is hereby granted, free of charge, to any person
++obtaining a copy of this software and associated documentation
++files (the "Software"), to deal in the Software without
++restriction, including without limitation the rights to use,
++copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the
++Software is furnished to do so, subject to the following
++conditions:
++
++The above copyright notice and this permission notice shall be
++included in all copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
++OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
++HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
++WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
++OTHER DEALINGS IN THE SOFTWARE.
