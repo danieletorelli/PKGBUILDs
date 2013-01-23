@@ -19,7 +19,7 @@ md5sums=('84709daeb21cbecd49f8f3b30f99edc4')
 
 package() {
   install -dm755 "${pkgdir}"/usr/share/playframework2 "${pkgdir}"/usr/bin
-  cp -r play-"${_pkgver}"-"${_develver}"/* "${pkgdir}"/usr/share/playframework2
+  cp -r play-${_pkgver}-${_develver}/* "${pkgdir}"/usr/share/playframework2
   chgrp -R users "${pkgdir}"/usr/share/playframework2/{framework,repository}
   chmod -R g+rwx "${pkgdir}"/usr/share/playframework2/{framework,repository}
   rm "${pkgdir}"/usr/share/playframework2/{play.bat,framework/build.bat}

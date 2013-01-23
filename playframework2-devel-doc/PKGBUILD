@@ -17,7 +17,7 @@ source=(http://download.playframework.org/releases/play-${_pkgver}-${_develver}.
 md5sums=('84709daeb21cbecd49f8f3b30f99edc4')
 
 package() {
-	install -dm755 "${pkgdir}"/usr/share/playframework2
-	cp -r play-"${_pkgver}"-"${_develver}"/{documentation,samples} "${pkgdir}"/usr/share/playframework2
+  install -dm755 "${pkgdir}"/usr/share/playframework2
+  cp -r play-${_pkgver}-${_develver}/{documentation,samples} "${pkgdir}"/usr/share/playframework2
 }
 
