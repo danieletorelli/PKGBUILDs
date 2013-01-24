@@ -1,4 +1,5 @@
-# Maintainer: Michele Damiano Torelli <me_AT_mdtorelli_DOT_it>
+# Maintainer:  Kevin Cox <kevincox.ca@gmail.com>
+# Contributor: Michele Damiano Torelli <me_AT_mdtorelli_DOT_it>
 
 pkgname=cloudprint-server-systemd
 pkgver=1
