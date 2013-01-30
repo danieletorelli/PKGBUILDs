@@ -36,7 +36,7 @@ package() {
   install -m755 bin/console.sh "${pkgdir}"/opt/orientdb/bin/
   install -m755 lib/* "${pkgdir}"/opt/orientdb/lib/
   install -m700 config/* "${pkgdir}"/opt/orientdb/config/
-  install -m700 bin/shutdown.sh bin/server.sh "${pkgdir}"/opt/orientdb/bin/
+  install -m700 bin/shutdown.sh bin/server.sh bin/orientdb.sh "${pkgdir}"/opt/orientdb/bin/
   cp -r www/* "${pkgdir}"/opt/orientdb/www/
 
   install -m644 "${srcdir}"/orientdb.service "${pkgdir}"/usr/lib/systemd/system/
