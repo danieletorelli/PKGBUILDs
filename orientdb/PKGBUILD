@@ -3,7 +3,7 @@
 
 pkgname=orientdb
 pkgver=1.3.0
-pkgrel=2
+pkgrel=3
 pkgdesc="A NoSQL Graph-Document DBMS"
 arch=('any')
 license=('Apache')
