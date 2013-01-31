@@ -9,7 +9,7 @@ arch=('any')
 license=('Apache')
 url="http://www.orientdb.org"
 depends=('java-runtime-headless')
-conflicts=('orientdb')
+conflicts=('orientdb' 'orientdb-git' 'orientdb-graphed-git')
 install=$pkgname.install
 source=("https://s3.amazonaws.com/orientdb/releases/${pkgname}-${pkgver}.tar.gz"
         'orientdb.service')
