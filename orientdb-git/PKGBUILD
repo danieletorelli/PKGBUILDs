@@ -4,7 +4,7 @@
 pkgname=orientdb-git
 pkgver=20130131
 pkgrel=1
-pkgdesc="A NoSQL Graph-Document DBMS - Development version"
+pkgdesc="A NoSQL Graph-Document DBMS - Standard edition - Development version"
 conflicts=('orientdb' 'orientdb-graphed' 'orientdb-graphed-git')
 arch=('any')
 license=('Apache')
