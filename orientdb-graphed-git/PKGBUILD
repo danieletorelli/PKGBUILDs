@@ -3,7 +3,7 @@
 pkgname=orientdb-graphed-git
 pkgver=20130131
 pkgrel=1
-pkgdesc="A NoSQL Graph-Document DBMS - Graph Edition (with TinkerPop Blueprints, Gremlin and Pipes) - Development version"
+pkgdesc="A NoSQL Graph-Document DBMS - Graph edition (with TinkerPop Blueprints, Gremlin and Pipes) - Development version"
 conflicts=('orientdb' 'orientdb-graphed' 'orientdb-git')
 arch=('any')
 license=('Apache')
