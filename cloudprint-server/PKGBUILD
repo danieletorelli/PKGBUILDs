@@ -1,7 +1,7 @@
-# Maintainer:  Kevin Cox <kevincox.ca@gmail.com>
-# Contributor: Michele Damiano Torelli <me_AT_mdtorelli_DOT_it>
+# Maintainer:  Michele Damiano Torelli <me_AT_mdtorelli_DOT_it>
+# Contributor: Kevin Cox <kevincox.ca@gmail.com>
 
-pkgname=cloudprint-server-systemd
+pkgname=cloudprint-server
 pkgver=1
 pkgrel=1
 pkgdesc='A systemd service file for starting Chromium in Google Cloud Print proxy mode'
