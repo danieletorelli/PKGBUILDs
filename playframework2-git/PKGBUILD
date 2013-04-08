@@ -12,7 +12,7 @@ makedepends=('git')
 provides=('playframework2')
 conflicts=('playframework' 'playframework2' 'playframework2-devel')
 replaces=('playframework2')
-source=('Play20::git+https://github.com/playframework/Play20')
+source=('git://github.com/playframework/Play20')
 sha512sums=('SKIP')
 
 pkgver() {
